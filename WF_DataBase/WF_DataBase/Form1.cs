@@ -16,5 +16,11 @@ namespace WF_DataBase
         {
             InitializeComponent();
         }
+
+        private void bt_start_Click(object sender, EventArgs e)
+        {
+            Create_db dataBase = new Create_db();
+            dataBase.create_db();
+        }
     }
 }
