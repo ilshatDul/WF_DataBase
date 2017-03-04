@@ -17,10 +17,25 @@ namespace WF_DataBase
             InitializeComponent();
         }
 
+        Create_db dataBase = new Create_db();
         private void bt_start_Click(object sender, EventArgs e)
         {
-            Create_db dataBase = new Create_db();
             dataBase.create_db();
+        }
+
+        public void rtb_cmd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_cmdGo_Click(object sender, EventArgs e)
+        {
+            if (rtb_cmd.Text != string.Empty)
+            {
+                rtb_cmd.Text = dataBase.Insert(rtb_cmd.Text);
+                //rtb_cmd.Clear();
+            }
+            else { rtb_cmd.Text = "Введите команду"; }
         }
     }
 }

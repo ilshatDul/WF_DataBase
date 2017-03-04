@@ -11,7 +11,7 @@ namespace WF_DataBase
     {
         private MySqlConnection connection;
         private string server;
-        private string database = @"hello";
+        private string database = @"SHOP";
         private string uid;
         private string password;
 
@@ -90,6 +90,36 @@ namespace WF_DataBase
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
+        }
+
+        //Insert statement
+        public string Insert(string query)
+        {
+            //string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+
+            //open connection
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //Execute command
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    this.CloseConnection();
+                    return ex.ToString();
+                }
+
+                //close connection
+                this.CloseConnection();
+                return "запрос выполнен!";
+            }
+            else return "ошибка подключения к базе";
         }
     }
 }
